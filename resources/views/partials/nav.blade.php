@@ -44,9 +44,14 @@
                     <details>
                         <summary>{{auth()->user()->name}}</summary>
                         <ul class="p-2">
+                            <li>  
+                                <a href="{{ route('profiles.show', ['profile' => auth()->user()]) }}">View Profile</a>
+                                
+                            </li>
                             <li>
-                                <form action="{{route('logout')}}" method="POST">
+                                <form action="{{route('logout') }}" method="POST">
                                     @csrf
+                                    
                                     <input type="submit" value="Logout">
                                 </form>
                             </li>
