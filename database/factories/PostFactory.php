@@ -16,9 +16,17 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $created = fake()->dateTimeBetween();
+        $updated = $created;
+        if(!rand(0,9)){
+            $updated = fake()->dateTimeBetween($created);
+        }
+
         return [
             'title' => fake()->sentence(),
-            'body' => fake()->paragraphs(3, true)
+            'body' => fake()->paragraphs(3, true),
+            'created_at' => $created,
+            'updated_at' => $updated,
         ];
     }
 }
