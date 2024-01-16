@@ -26,7 +26,7 @@ class PostFactory extends Factory
             'title' => fake()->sentence(),
             'body' => fake()->paragraphs(3, true),
             'created_at' => $created,
-            'updated_at' => $updated,
+            'updated_at' => $updated
         ];
     }
 }

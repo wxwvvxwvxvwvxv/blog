@@ -31,10 +31,13 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-
+        //$request->file('image')->store('pubic');
+        //dd($request->files->get('image'));
         $post = new Post($request->validated());
         // $post->title = $request->validated('title');
         // $post->body = $request->validated('body');
+        $post->image = $request->file('image')->store('public');
+        $post->user()->associate(auth()->user());
         $post->save();
         return redirect()->route('posts.index');
     }
