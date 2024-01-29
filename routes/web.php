@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
+Route::get('/post/{post}', [PublicController::class, 'post'])->name('post');
+Route::post('/post/{post}', [PublicController::class, 'comment'])->name('comment');
+Route::get('/post/{post}/like', [PublicController::class, 'like'])->name('like');
 
 // Route::get('/admin/posts', [PostController::class, 'index'])->name('posts.index');
 // Route::get('/admin/posts/create', [PostController::class, 'create'])->name('posts.create');
@@ -28,12 +31,10 @@ Route::get('/', [PublicController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::resource('/admin/posts', PostController::class);
-    Route::resource('/admin/profiles', ProfileController::class);
-    
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    // Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
