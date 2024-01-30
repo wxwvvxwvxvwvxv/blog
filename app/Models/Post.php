@@ -37,4 +37,9 @@ class Post extends Model
     public function likes(){
         return $this->hasMany(Like::class);
     }
+    public function authHasLiked(): Attribute {
+        return Attribute::get(function (){
+            return $this->likes()->where('user_id', Auth::user()->id);
+        });
+    }
 }
