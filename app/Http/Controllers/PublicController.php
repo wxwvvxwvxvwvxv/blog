@@ -53,7 +53,8 @@ class PublicController extends Controller
     }
 
     public function user(User $user){
-        return view('user', compact('user'));
+        $posts = Post::where('user_id', $user->id)->get();
+        return view('user', compact('user', 'posts'));
     }
 
     public function follow(User $user){
