@@ -26,10 +26,18 @@
                             <h2 class="card-title">{{ $post->title }}</h2>
                             <p>{{ $post->snippet }}...</p>
                             <p class="text-gray-500">{{ $post->created_at->diffForHumans() }}</p>
-                            <p class="text-gray-500">{{ $post->user->name }}</p>
+                            <p class="text-gray-500">
+                                <a href="{{route('user', ['user'=> $post->user])}}">{{ $post->user->name }}</a>
+                            </p>
                             <p class="text-gray-500">Likes: {{ $post->likes()->count() }}</p>
                             <div class="card-actions justify-end">
-                                <a href="{{route('like', ['post'=> $post])}}" class="btn btn-primary">Like</a>
+                                <a href="{{route('like', ['post'=> $post])}}" class="btn {{$post->authHasLiked ? 'btn-error' : 'btn-success'}}">
+                                    @if($post->authHasLiked)
+                                        Unlike
+                                    @else
+                                        Like
+                                    @endif
+                                </a>
                                 <a href="{{route('post', ['post'=> $post])}}" class="btn btn-primary">Read more</a>
                             </div>
                         </div>

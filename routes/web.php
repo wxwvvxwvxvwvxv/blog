@@ -17,9 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
+Route::get('/feed', [PublicController::class, 'feed'])->name('feed');
 Route::get('/post/{post}', [PublicController::class, 'post'])->name('post');
-Route::post('/post/{post}', [PublicController::class, 'comment'])->name('comment');
-Route::get('/post/{post}/like', [PublicController::class, 'like'])->name('like');
+
+Route::get('/user/{user}', [PublicController::class, 'user'])->name('user');
+
+
+
 
 // Route::get('/admin/posts', [PostController::class, 'index'])->name('posts.index');
 // Route::get('/admin/posts/create', [PostController::class, 'create'])->name('posts.create');
@@ -31,6 +35,10 @@ Route::get('/post/{post}/like', [PublicController::class, 'like'])->name('like')
 
 Route::middleware('auth')->group(function () {
     Route::resource('/admin/posts', PostController::class);
+
+    Route::get('/post/{post}/like', [PublicController::class, 'like'])->name('like');
+    Route::post('/post/{post}', [PublicController::class, 'comment'])->name('comment');
+    Route::get('/user/{user}/follow', [PublicController::class, 'follow'])->name('follow');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
