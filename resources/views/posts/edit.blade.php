@@ -30,6 +30,23 @@
                             </label>
                         @enderror
                       </div>
+                      <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Tags</span>
+                        </label>
+                        <select multiple class="select select-bordered w-full" name="tags[]" size="{{$tags->count()}}">
+                            @foreach ($tags as $tag)
+                                <option @if($post->tags()->where('id', $tag->id)->exists()) selected @endif value="{{$tag->id}}">
+                                    {{$tag->name}}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('tags.*')
+                            <label class="label">
+                                <span class="label-text-alt text-error">{{ $message }}</span>
+                            </label>
+                        @enderror
+                    </div>
                       <input type="submit" class="btn btn-primary my-3" value="Update">
                 </form>
             </div>

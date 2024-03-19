@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Post;
@@ -13,9 +14,9 @@ use Illuminate\Support\Facades\Auth;
 class PublicController extends Controller
 {
     public function index(){
-        $posts = Post::latest()->paginate(16);
+        $posts = Post::with(['user:id,name', 'images'])->latest()->paginate(16);
         //dd($posts->toArray());
-        return view('welcome', compact('posts'));
+        return $posts;
     }
 
     public function feed(){

@@ -21,7 +21,7 @@ class FollowSeeder extends Seeder
                 if($randUser === $user){
                     continue; // don't follow yourself
                 }
-                Follow::factory()->create(['follower_id' => $randUser->id, 'followee_id' => $user->id]);
+                $user->followers()->attach($randUser);
             }
         }
     }

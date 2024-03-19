@@ -26,10 +26,16 @@
                             <h2 class="card-title">{{ $post->title }}</h2>
                             <p>{{ $post->snippet }}...</p>
                             <p class="text-gray-500">{{ $post->created_at->diffForHumans() }}</p>
+                            <p class="text-gray-500">{{ $post->created_at }}</p>
                             <p class="text-gray-500">
                                 <a href="{{route('user', ['user'=> $post->user])}}">{{ $post->user->name }}</a>
                             </p>
                             <p class="text-gray-500">Likes: {{ $post->likes()->count() }}</p>
+                            <div class="flex flex-wrap">
+                                @foreach ($post->tags as $tag)
+                                    <a href="{{route('tag', ['tag' => $tag])}}"><div class="badge badge-outline ml-1 mb-1">{{$tag->name}}</div></a>
+                                @endforeach
+                            </div>
                             <div class="card-actions justify-end">
                                 <a href="{{route('like', ['post'=> $post])}}" class="btn {{$post->authHasLiked ? 'btn-error' : 'btn-success'}}">
                                     @if($post->authHasLiked)

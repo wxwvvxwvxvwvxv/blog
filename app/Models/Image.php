@@ -18,7 +18,7 @@ class Image extends Model
                 if(!$image || parse_url($image, PHP_URL_SCHEME)){
                     return $image;
                 }
-                return Storage::url($image);
+                return url(Storage::url($image));
             },
             set: function ($image){
                 if(!is_a($image, UploadedFile::class)){
